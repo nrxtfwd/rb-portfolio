@@ -39,12 +39,8 @@
         }
 
         @keyframes moveHalftone {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(48px, 48px);
-            }
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(48px, 48px); }
         }
 
         /* Keyframe Animations */
@@ -212,6 +208,20 @@
             z-index: 50;
         }
 
+        /* Video Controls Overlay Styles */
+        .video-play-overlay {
+            transition: opacity 0.25s ease;
+            opacity: 1; /* Always visible when paused */
+        }
+
+        .group\/player.is-playing .video-play-overlay {
+            opacity: 0; /* Hidden by default when playing */
+        }
+
+        .group\/player.is-playing:hover .video-play-overlay {
+            opacity: 1; /* Only show on hover when playing */
+        }
+
         /* Dynamic Color Highlights */
         .highlight-amber { color: #f59e0b; font-weight: 600; }
         .highlight-cyan { color: #0284c7; font-weight: 600; }
@@ -260,7 +270,7 @@
         <!-- HOME VIEW CONTAINER -->
         <div id="home-view" class="space-y-16">
 
-            <!-- Intro Section (Unboxed, Enlarged, Centered, Horizontal Stat Cards) -->
+            <!-- Intro Section -->
             <div class="min-h-[calc(100vh-80px)] flex flex-col justify-center py-12">
                 <section id="about" class="relative my-auto space-y-8 text-center max-w-4xl mx-auto">
                     <!-- Title & Description -->
@@ -400,7 +410,6 @@
     </footer>
 
     <script>
-        // Fallback JSON System Data embedded directly for instant loading
         const defaultSystemsData = [
             {
                 id: 1,
@@ -436,7 +445,6 @@
         let visibleCount = 3;
         let audioCtx = null;
 
-        // Wii Sound Effects Synthesizer
         function playWiiSound(type) {
             try {
                 if (!audioCtx) {
@@ -463,8 +471,8 @@
                     osc.stop(now + 0.03);
                 } else if (type === 'click') {
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, now); // C5
-                    osc.frequency.setValueAtTime(659.25, now + 0.05); // E5
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.05);
                     gain.gain.setValueAtTime(0.04, now);
                     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
                     osc.start(now);
@@ -502,15 +510,18 @@
         function togglePlayPause(playerKey, event) {
             if (event) event.stopPropagation();
             const video = document.getElementById(`video-${playerKey}`);
+            const container = document.getElementById(`container-${playerKey}`);
             const centerIcon = document.getElementById(`center-icon-${playerKey}`);
             
             if (!video) return;
 
             if (video.paused || video.ended) {
                 video.play();
+                container.classList.add('is-playing');
                 if (centerIcon) centerIcon.className = 'fa-solid fa-pause text-xl';
             } else {
                 video.pause();
+                container.classList.remove('is-playing');
                 if (centerIcon) centerIcon.className = 'fa-solid fa-play text-xl ml-1';
             }
         }
@@ -524,7 +535,7 @@
                         <source src="${path}" type="video/mp4">
                     </video>
 
-                    <div class="absolute inset-0 flex items-center justify-center bg-slate-900/10 group-hover/player:bg-slate-900/25 transition-all">
+                    <div class="video-play-overlay absolute inset-0 flex items-center justify-center bg-slate-900/10 group-hover/player:bg-slate-900/25 transition-all">
                         <div class="w-14 h-14 wii-btn-blue rounded-full flex items-center justify-center text-white shadow-lg transition-transform group-hover/player:scale-110">
                             <i id="center-icon-${playerKey}" class="fa-solid fa-play text-xl ml-0.5"></i>
                         </div>
