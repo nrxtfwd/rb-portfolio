@@ -44,7 +44,7 @@
     "title": "Complex Football NPC AI",
     "shortDesc": "Programmed using decision trees to make optimal decisions on positioning to effectively shoot, pass or defend the ball.",
     "fullDesc": "Programmed using decision trees to make optimal decisions on positioning to effectively shoot, pass or defend the ball. Celebrates when scoring a goal, behaves like fans when not playing, and splits themselves into positions.",
-    "videoFileName": "video-6.mp4",
+    "videoFileName": "video-7.mp4",
     "fallbackSource": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
   }
 ]
