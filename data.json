@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "title": "Advanced Combat System",
+    "shortDesc": "Features 5-hit combos, uptilts, downsmashes, blocking system with guard breaks, Downed system where you can Carry or Grip downed enemies/allies, mid-combo dodge/evasive system and wall stuns.",
+    "fullDesc": "Features 5-hit combos, uptilts, downsmashes, blocking system with guard breaks, Downed system where you can Carry or Grip downed enemies/allies, mid-combo dodge/evasive system and wall stuns.",
+    "videoFileName": "video-1.mp4",
+    "fallbackSource": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+  },
+  {
+    "id": 1,
+    "title": "FNAF-inspired Dynamic Menu",
+    "shortDesc": "Main menu with background music, static effects, highly interactive buttons and save state for previous runs.",
+    "fullDesc": "Main menu with background music, static effects, highly interactive buttons and save state for previous runs.",
+    "videoFileName": "video-4.mp4",
+    "fallbackSource": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+  },
+  {
+    "id": 2,
+    "title": "RNG-Based Chests",
+    "shortDesc": "Several chest tiers, displays unit icons, unit's upgrade progress to next level, moderately dynamic vfx and animations, card rarity corresponds to chest tier.",
+    "fullDesc": "Several chest tiers, displays unit icons, unit's upgrade progress to next level, moderately dynamic vfx and animations, card rarity corresponds to chest tier.",
+    "videoFileName": "video-3.mp4",
+    "fallbackSource": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+  },
+  {
+    "id": 3,
+    "title": "Progress-Tracking Quests",
+    "shortDesc": "Quest giver assigns a quest and progress is tracked by the bar under the quest description. Cancel quest option is provided. When complete, gives a reward and a fancy satisfying vfx.",
+    "fullDesc": "Quest giver assigns a quest and progress is tracked by the bar under the quest description. Cancel quest option is provided. When complete, gives a reward and a fancy satisfying vfx. ",
+    "videoFileName": "video-5.mp4",
+    "fallbackSource": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+  },
+  {
+    "id": 4,
+    "title": "Interactable Lobby Main Menu",
+    "shortDesc": "Multiple tabs that have different options in them. Transitions smoothly with fades and smooth camera movement. Custom lobby system that allows creation and joining of public lobbies.",
+    "fullDesc": "Multiple tabs that have different options in them. Transitions smoothly with fades and smooth camera movement. Custom lobby system that allows creation and joining of public lobbies.",
+    "videoFileName": "video-6.mp4",
+    "fallbackSource": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+  },
+  {
+    "id": 5,
+    "title": "Complex Football NPC AI",
+    "shortDesc": "Programmed using decision trees to make optimal decisions on positioning to effectively shoot, pass or defend the ball.",
+    "fullDesc": "Programmed using decision trees to make optimal decisions on positioning to effectively shoot, pass or defend the ball. Celebrates when scoring a goal, behaves like fans when not playing, and splits themselves into positions.",
+    "videoFileName": "video-6.mp4",
+    "fallbackSource": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+  }
+]

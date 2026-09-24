@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wii Shop Channel - Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Continuum / Pixel-like soft font fallback -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fredoka', 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(to bottom, #eef2f7 0%, #dce4ed 50%, #ccd7e4 100%);
+            background-attachment: fixed;
+            color: #4b4b4b;
+            user-select: none;
+            overflow-x: hidden;
+        }
+
+        /* Keyframe Animations for Page Movement */
+        @keyframes wiiWave {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-3px) rotate(-1.5deg); }
+            75% { transform: translateY(3px) rotate(1.5deg); }
+        }
+
+        @keyframes floatSubtle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .animate-wave {
+            display: inline-block;
+            animation: wiiWave 3s ease-in-out infinite;
+        }
+
+        .animate-float {
+            animation: floatSubtle 4s ease-in-out infinite;
+        }
+
+        /* Wii Shop Button Base - Soft Rounded & Deep Drop Shadow */
+        .wii-btn {
+            background: linear-gradient(to bottom, #ffffff 0%, #eaeaea 70%, #d8d8d8 100%);
+            border: 2px solid #a6a6a6;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 3px 0 #888888, inset 0 1px 0 #ffffff;
+            color: #4b4b4b;
+            transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+            position: relative;
+        }
+
+        .wii-btn:hover {
+            background: linear-gradient(to bottom, #ffffff 0%, #f0f8ff 70%, #d0e8fc 100%);
+            border-color: #31b0d5;
+            color: #0088cc;
+            box-shadow: 0 8px 18px rgba(49, 176, 213, 0.25), 0 4px 0 #005580, inset 0 1px 0 #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .wii-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1), 0 1px 0 #888888, inset 0 1px 0 #ffffff;
+        }
+
+        /* Wii Shop Primary Blue Button */
+        .wii-btn-blue {
+            background: linear-gradient(to bottom, #72cbfd 0%, #28a0f0 70%, #1080d0 100%);
+            border: 2px solid #005b9f;
+            border-radius: 16px;
+            box-shadow: 0 4px 14px rgba(16, 128, 208, 0.35), 0 3px 0 #003660, inset 0 1px 0 #bce3fe;
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .wii-btn-blue:hover {
+            background: linear-gradient(to bottom, #8ad4ff 0%, #3bb0ff 70%, #1e90e0 100%);
+            border-color: #004070;
+            box-shadow: 0 8px 20px rgba(16, 128, 208, 0.45), 0 4px 0 #002040, inset 0 1px 0 #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .wii-btn-blue:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2), 0 1px 0 #003660, inset 0 1px 0 #bce3fe;
+        }
+
+        /* Wii Shop Orange Accent Button */
+        .wii-btn-orange {
+            background: linear-gradient(to bottom, #ffbe6b 0%, #ff8800 70%, #d66d00 100%);
+            border: 2px solid #994c00;
+            border-radius: 16px;
+            box-shadow: 0 4px 14px rgba(255, 136, 0, 0.35), 0 3px 0 #5e2f00, inset 0 1px 0 #ffe3be;
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .wii-btn-orange:hover {
+            background: linear-gradient(to bottom, #ffcb85 0%, #ff9922 70%, #e67700 100%);
+            box-shadow: 0 8px 20px rgba(255, 136, 0, 0.45), 0 4px 0 #5e2f00, inset 0 1px 0 #ffe3be;
+            transform: translateY(-2px);
+        }
+
+        /* Channel Card Grid Style - Rounded & Deep Shadow */
+        .wii-card {
+            background: #ffffff;
+            border: 2px solid #cccccc;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05), inset 0 0 0 1px #ffffff;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .wii-card:hover {
+            border-color: #31b0d5;
+            box-shadow: 0 20px 30px -10px rgba(49, 176, 213, 0.3), 0 12px 15px -8px rgba(0, 0, 0, 0.1), inset 0 0 0 2px #31b0d5;
+            transform: translateY(-6px) scale(1.015);
+        }
+
+        /* Classic Wii Border Frame - Elevated Depth & Soft Rounded */
+        .wii-frame {
+            background: #ffffff;
+            border: 2px solid #d1d5db;
+            border-radius: 24px;
+            box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.04), inset 0 0 12px rgba(255,255,255,0.8);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .wii-frame-hover:hover {
+            border-color: #31b0d5;
+            box-shadow: 0 16px 32px -6px rgba(49, 176, 213, 0.2), 0 10px 12px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Top Header Bar */
+        .wii-header {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 3px solid #31b0d5;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Bottom Control Bar */
+        .wii-footer {
+            background: rgba(245, 245, 245, 0.95);
+            backdrop-filter: blur(8px);
+            border-top: 3px solid #a6a6a6;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Dynamic Color-Coded Inline Text Highlights (No Boxes, Same Font Size) */
+        .highlight-amber {
+            color: #d97706;
+            font-weight: 600;
+        }
+
+        .highlight-cyan {
+            color: #0284c7;
+            font-weight: 600;
+        }
+
+        .highlight-emerald {
+            color: #059669;
+            font-weight: 600;
+        }
+
+        .highlight-purple {
+            color: #7e22ce;
+            font-weight: 600;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f2f5;
+            border-left: 2px solid #cccccc;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a6a6a6;
+            border-radius: 6px;
+            border: 2px solid #f0f2f5;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #31b0d5;
+        }
+
+        /* Video Timeline custom Wii style */
+        input[type=range].wii-timeline {
+            accent-color: #31b0d5;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
+
+    <!-- Top Wii Shop Header -->
+    <header class="wii-header sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer group" onclick="showHomeView()">
+                <div class="transition-transform group-hover:scale-110">
+                    <span class="text-s font-semibold text-sky-600 tracking-wider uppercase">danish.dev</span>
+                </div>
+            </div>
+
+            <!-- Wii Points / Info Badge -->
+            <div class="flex items-center space-x-4">
+                <a href="#contact" onclick="showHomeView('#contact')" class="wii-btn-orange px-4 py-1.5 text-sm font-bold flex items-center space-x-1">
+                    <i class="fa-solid fa-envelope text-xs"></i>
+                    <span>Contact Me</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Wii Content Area -->
+    <main class="max-w-6xl w-full mx-auto p-4 sm:p-6 flex-grow">
+
+        <!-- HOME VIEW CONTAINER -->
+        <div id="home-view" class="space-y-8">
+
+            <!-- Wii Welcome Banner / About -->
+            <section id="about" class="wii-frame p-6 sm:p-8 bg-white relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="space-y-4 text-center md:text-left">
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">
+                            <span class="animate-wave">Hi, I'm Danish Azhar! 👋</span>
+                        </h2>
+                        <p class="text-gray-600 max-w-2xl text-sm sm:text-base leading-relaxed">
+                            I've been developing on Roblox for <span class="highlight-amber"><i class="fa-solid fa-hourglass-half text-xs mr-0.5"></i>8 years</span>, capable of building <span class="highlight-cyan"><i class="fa-solid fa-sparkles text-xs mr-0.5"></i>clean</span>, organized infrastructure alongside <span class="highlight-emerald"><i class="fa-solid fa-file-code text-xs mr-0.5"></i>well-documented</span> and <span class="highlight-purple"><i class="fa-solid fa-bolt text-xs mr-0.5"></i>performant</span> code. I have also built many different types of systems across <span class="highlight-amber"><i class="fa-solid fa-gamepad text-xs mr-0.5"></i>many game genres</span> as you can see below.
+                        </p>
+                    </div>
+
+                    <!-- Wii Balance Board / Stats Display -->
+                    <div class="grid grid-cols-2 gap-3 w-full md:w-auto">
+                        <div class="wii-frame wii-frame-hover p-3 bg-slate-50 text-center min-w-[120px] transition-transform hover:-translate-y-1">
+                            <span class="text-xs font-bold text-gray-500 uppercase block">Response</span>
+                            <span class="text-lg font-black text-sky-600">&lt; 12 Hours</span>
+                        </div>
+                        <div class="wii-frame wii-frame-hover p-3 bg-slate-50 text-center min-w-[120px] transition-transform hover:-translate-y-1">
+                            <span class="text-xs font-bold text-gray-500 uppercase block">Commissions</span>
+                            <span class="text-lg font-black text-emerald-600">8+ Completed</span>
+                        </div>
+                        <div class="wii-frame wii-frame-hover p-3 bg-slate-50 text-center col-span-2 transition-transform hover:-translate-y-1">
+                            <span class="text-xs font-bold text-gray-500 uppercase block">Status</span>
+                            <span class="text-sm font-bold text-sky-600 flex items-center justify-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                                Open for New Titles
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Titles Grid Section -->
+            <section id="projects" class="space-y-4">
+                <div class="flex items-center justify-between border-b-2 border-gray-300 pb-2">
+                    <h3 class="text-xl font-bold text-gray-700 flex items-center space-x-2">
+                        <i class="fa-solid fa-gamepad text-sky-500 animate-bounce"></i>
+                        <span>Projects I've Worked On</span>
+                    </h3>
+                </div>
+
+                <!-- Systems Grid -->
+                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cards populated via JS -->
+                </div>
+
+                <div id="view-more-container" class="text-center pt-4 hidden">
+                    <button id="view-more-btn" onclick="loadMoreSystems()" class="wii-btn px-8 py-3 text-sm font-bold text-gray-700">
+                        <i class="fa-solid fa-plus mr-2 text-sky-500"></i>Load More Titles
+                    </button>
+                </div>
+            </section>
+
+            <!-- Wii Contact Section -->
+            <section id="contact" class="wii-frame p-6 sm:p-8 bg-white space-y-6">
+                <div class="border-b-2 border-gray-200 pb-3">
+                    <h3 class="text-2xl font-bold text-gray-800">Contact Me!</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Contact Information Cards -->
+                    <div class="space-y-4">
+                        <div class="wii-frame wii-frame-hover p-4 bg-slate-50 flex items-center justify-between transition-transform hover:-translate-y-1">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 wii-btn-blue flex items-center justify-center text-lg rounded-xl">
+                                    <i class="fa-brands fa-discord"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold text-gray-400 uppercase block">Discord ID</span>
+                                    <span id="discord-text" class="font-bold text-gray-700 select-all">nrxtfwd</span>
+                                </div>
+                            </div>
+                            <button onclick="copyDiscord()" class="wii-btn px-3 py-1.5 text-xs font-bold">
+                                <span id="copy-btn-text">Copy</span>
+                            </button>
+                        </div>
+
+                        <div class="wii-frame wii-frame-hover p-4 bg-slate-50 flex items-center justify-between transition-transform hover:-translate-y-1">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 wii-btn-orange flex items-center justify-center text-lg rounded-xl">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold text-gray-400 uppercase block">Email Address</span>
+                                    <a href="mailto:danishazhar2007@gmail.com" class="font-bold text-gray-700 text-sm hover:text-sky-600 break-all">danishazhar2007@gmail.com</a>
+                                </div>
+                            </div>
+                            <a href="mailto:danishazhar2007@gmail.com" class="wii-btn px-3 py-1.5 text-xs font-bold">
+                                Send
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-xs font-bold text-gray-500 uppercase mb-1">User Name</label>
+                            <input type="text" id="name" required class="w-full wii-frame px-3 py-2 text-sm text-gray-800 bg-white focus:outline-none focus:border-sky-500 transition-colors rounded-xl" placeholder="Enter your name">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-xs font-bold text-gray-500 uppercase mb-1">Console Mail / Email</label>
+                            <input type="email" id="email" required class="w-full wii-frame px-3 py-2 text-sm text-gray-800 bg-white focus:outline-none focus:border-sky-500 transition-colors rounded-xl" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-xs font-bold text-gray-500 uppercase mb-1">Message Memo</label>
+                            <textarea id="message" rows="3" required class="w-full wii-frame px-3 py-2 text-sm text-gray-800 bg-white focus:outline-none focus:border-sky-500 transition-colors resize-none rounded-xl" placeholder="Type your message here..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full wii-btn-blue py-2.5 text-sm font-bold uppercase tracking-wider">
+                            Submit Email
+                        </button>
+                        <div id="form-success-msg" class="hidden p-3 bg-emerald-100 border border-emerald-400 text-emerald-800 text-xs font-bold text-center rounded-xl">
+                            <i class="fa-solid fa-check mr-1"></i> Message successfully sent to Danish's Console!
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- DEDICATED TITLE DETAIL VIEW CONTAINER -->
+        <div id="project-detail-view" class="hidden space-y-6">
+            <!-- Content dynamically generated by JS -->
+        </div>
+
+    </main>
+
+    <!-- Bottom Wii Navigation / Footer -->
+    <footer class="wii-footer sticky bottom-0 sz-50 px-4 py-3 mt-8">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <button onclick="showHomeView('#projects')" class="wii-btn px-6 py-2 text-sm font-bold text-gray-700 flex items-center space-x-2">
+                    <i class="fa-solid fa-list text-gray-500"></i>
+                    <span>Titles List</span>
+                </button>
+            </div>
+
+            <div class="text-xs font-bold text-gray-500 flex items-center space-x-4">
+                <span>&copy; 2026 Danish Azhar</span>
+                <a href="https://github.com/nrxtfwd" target="_blank" class="hover:text-sky-600 transition-colors"><i class="fa-brands fa-github text-base"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let systemsData = [];
+        let visibleCount = 3;
+        let audioCtx = null;
+
+        // Wii Sound Synthesizer Effects
+        function playWiiSound(type) {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+
+                if (type === 'hover') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(880, now);
+                    osc.frequency.exponentialRampToValueAtTime(1200, now + 0.03);
+                    gain.gain.setValueAtTime(0.015, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+                    osc.start(now);
+                    osc.stop(now + 0.03);
+                } else if (type === 'click') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.05); // E5
+                    gain.gain.setValueAtTime(0.04, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+                    osc.start(now);
+                    osc.stop(now + 0.12);
+                }
+            } catch (e) {}
+        }
+
+        function attachAudioTriggers() {
+            const elements = document.querySelectorAll('a, button, .wii-card, [onclick]');
+            elements.forEach(el => {
+                if (!el.dataset.sfxBound) {
+                    el.addEventListener('mouseenter', () => playWiiSound('hover'));
+                    el.addEventListener('click', () => playWiiSound('click'));
+                    el.dataset.sfxBound = 'true';
+                }
+            });
+        }
+
+        async function loadData() {
+            try {
+                const res = await fetch('./data.json');
+                if (!res.ok) throw new Error('HTTP error ' + res.status);
+                systemsData = await res.json();
+                renderSystemsCards();
+            } catch (err) {
+                console.error("Failed loading system details from ./data.json:", err);
+                const grid = document.getElementById('projects-grid');
+                grid.innerHTML = `
+                    <div class="col-span-full wii-frame p-6 text-center bg-white text-red-600 text-sm">
+                        <i class="fa-solid fa-triangle-exclamation text-2xl mb-2 text-amber-500 animate-bounce"></i>
+                        <p class="font-bold">System Channel Data Not Found!</p>
+                        <p class="text-xs text-gray-500 mt-1">Please ensure <code>./data.json</code> is accessible in your current directory.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function getSystemVideoPath(system) {
+            return system.videoPath || `./videos/${system.videoFileName}`;
+        }
+
+        function togglePlayPause(playerKey, event) {
+            if (event) event.stopPropagation();
+            const video = document.getElementById(`video-${playerKey}`);
+            const centerIcon = document.getElementById(`center-icon-${playerKey}`);
+            
+            if (!video) return;
+
+            if (video.paused || video.ended) {
+                video.play();
+                if (centerIcon) centerIcon.className = 'fa-solid fa-pause text-xl';
+            } else {
+                video.pause();
+                if (centerIcon) centerIcon.className = 'fa-solid fa-play text-xl ml-1';
+            }
+        }
+
+        function renderVideoElement(system, scope = 'main') {
+            const playerKey = `${scope}-${system.id}`;
+            const path = getSystemVideoPath(system);
+            return `
+                <div id="container-${playerKey}" class="relative w-full aspect-video bg-black overflow-hidden rounded-t-[18px] group/player cursor-pointer flex flex-col justify-between" onclick="togglePlayPause('${playerKey}', event)">
+                    <video id="video-${playerKey}" class="w-full h-full object-cover transition-transform duration-300 group-hover/player:scale-105" playsinline onerror="handleVideoError(this, '${path}')">
+                        <source src="${path}" type="video/mp4">
+                    </video>
+
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover/player:bg-black/20 transition-all">
+                        <div class="w-12 h-12 wii-btn-blue rounded-full flex items-center justify-center text-white shadow-md transition-transform group-hover/player:scale-110">
+                            <i id="center-icon-${playerKey}" class="fa-solid fa-play text-lg ml-0.5"></i>
+                        </div>
+                    </div>
+
+                    <div id="placeholder-${playerKey}" class="hidden absolute inset-0 bg-slate-800 flex flex-col items-center justify-center p-4 text-center text-white z-20">
+                        <i class="fa-solid fa-compact-disc text-3xl text-sky-400 mb-2 animate-spin"></i>
+                        <p class="text-xs font-bold">Disc Error / Video Missing</p>
+                        <code class="text-[10px] bg-black px-2 py-1 text-sky-300 mt-1">${path}</code>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleVideoError(videoEl, path) {
+            const container = videoEl.parentElement;
+            const placeholder = container.querySelector('[id^="placeholder-"]');
+            if (placeholder) placeholder.classList.remove('hidden');
+        }
+
+        function renderSystemsCards() {
+            const grid = document.getElementById('projects-grid');
+            const viewMoreContainer = document.getElementById('view-more-container');
+            const currentBatch = systemsData.slice(0, visibleCount);
+
+            grid.innerHTML = currentBatch.map(system => `
+                <div class="wii-card flex flex-col justify-between overflow-hidden">
+                    <div>
+                        ${renderVideoElement(system, 'main')}
+                        <div class="p-5 space-y-2">
+                            <h4 onclick="openProjectDetail(${system.id})" class="text-lg font-bold text-gray-800 hover:text-sky-600 cursor-pointer transition-colors">
+                                ${system.title}
+                            </h4>
+                            <p class="text-xs text-gray-600 leading-relaxed line-clamp-3">
+                                ${system.shortDesc}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (visibleCount < systemsData.length) {
+                viewMoreContainer.classList.remove('hidden');
+            } else {
+                viewMoreContainer.classList.add('hidden');
+            }
+
+            attachAudioTriggers();
+        }
+
+        function loadMoreSystems() {
+            visibleCount += 3;
+            renderSystemsCards();
+        }
+
+        function openProjectDetail(id) {
+            const index = systemsData.findIndex(item => item.id === id);
+            if (index === -1) return;
+
+            const system = systemsData[index];
+            const hasPrev = index > 0;
+            const hasNext = index < systemsData.length - 1;
+            const descriptionText = (system.fullDesc && system.fullDesc.trim() !== "") ? system.fullDesc : system.shortDesc;
+
+            const detailContainer = document.getElementById('project-detail-view');
+            detailContainer.innerHTML = `
+                <div class="wii-frame p-6 sm:p-8 bg-white space-y-6">
+                    <div class="flex flex-col md:flex-row items-start justify-between gap-4 border-b-2 border-gray-200 pb-4">
+                        <div>
+                            <h2 class="text-3xl font-extrabold text-gray-800">${system.title}</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div class="lg:col-span-7 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+                            ${renderVideoElement(system, 'detail')}
+                        </div>
+                        <div class="lg:col-span-5 space-y-4">
+                            <div class="wii-frame p-5 bg-slate-50 space-y-2">
+                                <h4 class="text-xs font-bold text-gray-400 uppercase">Description</h4>
+                                <p class="text-sm text-gray-700 leading-relaxed">${descriptionText}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t-2 border-gray-200">
+                        <button onclick="showHomeView('#projects')" class="wii-btn px-6 py-2 text-xs font-bold uppercase text-gray-700">
+                            <i class="fa-solid fa-arrow-left mr-1"></i> Return to List
+                        </button>
+
+                        <div class="flex items-center space-x-2">
+                            ${hasPrev ? `
+                                <button onclick="openProjectDetail(${systemsData[index - 1].id})" class="wii-btn px-4 py-2 text-xs font-bold text-gray-700">
+                                    Previous Title
+                                </button>
+                            ` : ''}
+                            ${hasNext ? `
+                                <button onclick="openProjectDetail(${systemsData[index + 1].id})" class="wii-btn-blue px-4 py-2 text-xs font-bold">
+                                    Next Title
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('home-view').classList.add('hidden');
+            detailContainer.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            attachAudioTriggers();
+        }
+
+        function showHomeView(targetSection) {
+            document.getElementById('project-detail-view').classList.add('hidden');
+            document.getElementById('home-view').classList.remove('hidden');
+            if (targetSection) {
+                const el = document.querySelector(targetSection);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function copyDiscord() {
+            const discordText = document.getElementById('discord-text').innerText;
+            const copyBtnText = document.getElementById('copy-btn-text');
+            navigator.clipboard.writeText(discordText).then(() => {
+                copyBtnText.innerText = 'Copied!';
+                setTimeout(() => { copyBtnText.innerText = 'Copy'; }, 2000);
+            });
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const successMsg = document.getElementById('form-success-msg');
+            successMsg.classList.remove('hidden');
+            document.getElementById('contact-form').reset();
+            setTimeout(() => { successMsg.classList.add('hidden'); }, 5000);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            attachAudioTriggers();
+        });
+    </script>
+</body>
+</html>
